@@ -1,0 +1,22 @@
+name:  登录成功用例
+steps:
+  - request: # 发送请求
+      method:  POST
+      url:  http://116.62.63.211/shop/api.php?application=app&application_client_type=weixin
+      params:
+        s:  user/login
+      json: {
+        "accounts":"zwj895944676",
+        "pwd":"zwj895944676",
+        "type":"username"
+      }
+  - response: # 断言响应
+      status_code: 200
+      json:
+        code: 0
+        msg: success
+        data:
+          name: 分类
+
+  - extract: # 提取变量
+      token:  [ json, $.data.token]
